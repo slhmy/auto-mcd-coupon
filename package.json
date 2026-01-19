@@ -20,8 +20,9 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
-    "ai": "^6.0.40",
     "@openrouter/ai-sdk-provider": "6.0.0-alpha.1",
+    "ai": "^6.0.40",
+    "dotenv": "^17.2.3",
     "zod": "^4.3.5"
   },
   "devDependencies": {
