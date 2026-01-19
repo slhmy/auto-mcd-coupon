@@ -80,8 +80,7 @@ OPENROUTER_MODEL=google/gemini-2.0-flash-exp:free
 ## GitHub Actions
 
 The workflow runs automatically:
-- **Daily**: Every day at 9:00 AM Beijing Time (1:00 AM UTC)
-- **Weekly**: Every Sunday at 9:00 AM Beijing Time (1:00 AM UTC)
+- **Weekly**: Every Monday at 11:00 AM Beijing Time (3:00 AM UTC)
 
 You can also trigger it manually:
 1. Go to "Actions" tab in your repository
