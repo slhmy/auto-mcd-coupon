@@ -1,0 +1,45 @@
+name: Auto Claim McDonald's Coupons
+
+on:
+  schedule:
+    # Run weekly on Monday at 11:00 AM Beijing Time (UTC+8 = 3:00 AM UTC)
+    - cron: '0 3 * * 1'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  claim-coupons:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Claim McDonald's Coupons
+        env:
+          MCD_MCP_TOKEN: ${{ secrets.MCD_MCP_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'google/gemini-2.0-flash-exp:free' }}
+        run: npm start
+
+      - name: Upload logs (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupon-claim-logs
+          path: |
+            *.log
+          retention-days: 7
