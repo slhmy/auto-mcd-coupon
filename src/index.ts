@@ -2,22 +2,23 @@
 
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import { openrouter } from '@openrouter/ai-sdk-provider';
+import { createOpenRouter } from '@openrouter/ai-sdk-provider';
 import { generateText, tool } from 'ai';
 import { z } from 'zod';
 
 // Configuration from environment variables
 const MCD_MCP_TOKEN = process.env.MCD_MCP_TOKEN;
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'qwen/qwen3-coder:free';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL || 'https://openrouter.ai/api/v1';
+const OPENAI_MODEL = process.env.OPENAI_MODEL || 'qwen/qwen3-coder:free';
 
 if (!MCD_MCP_TOKEN) {
   console.error('Error: MCD_MCP_TOKEN environment variable is required');
   process.exit(1);
 }
 
-if (!OPENROUTER_API_KEY) {
-  console.error('Error: OPENROUTER_API_KEY environment variable is required');
+if (!OPENAI_API_KEY) {
+  console.error('Error: OPENAI_API_KEY environment variable is required');
   process.exit(1);
 }
 
@@ -58,7 +59,8 @@ function jsonSchemaToZod(schema: any): z.ZodType<any> {
 
 async function main() {
   console.log('🍔 McDonald\'s Coupon Auto-Claim Starting...');
-  console.log(`Using model: ${OPENROUTER_MODEL}`);
+  console.log(`Using model: ${OPENAI_MODEL}`);
+  console.log(`API base URL: ${OPENAI_BASE_URL}`);
 
   // Initialize MCP client for McDonald's service
   const mcpClient = new Client({
@@ -120,9 +122,15 @@ async function main() {
   // Use AI to claim coupons
   console.log('\n🤖 Asking AI to claim McDonald\'s coupons...');
 
+  // Create OpenRouter provider with custom settings
+  const provider = createOpenRouter({
+    apiKey: OPENAI_API_KEY,
+    baseURL: OPENAI_BASE_URL,
+  });
+
   try {
     const result = await generateText({
-      model: openrouter(OPENROUTER_MODEL),
+      model: provider(OPENAI_MODEL),
       prompt: `You are an assistant that helps claim McDonald's coupons in China. 
       
 Your task is to:

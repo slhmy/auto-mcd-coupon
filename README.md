@@ -24,7 +24,7 @@
 
 #### 🤖 AI 智能领取
 - 使用 Vercel AI SDK 智能编排
-- 接入 OpenRouter 免费 AI 模型
+- 支持 OpenAI 兼容 API（OpenRouter、OpenAI 等）
 - 自动识别并领取所有可用优惠券
 
 </td>
@@ -71,21 +71,24 @@
 3. 点击右上角进入「**控制台**」
 4. 点击「**激活**」按钮获取你的 MCP Token
 
-#### 2️⃣ 获取 OpenRouter API Key
+#### 2️⃣ 获取 OpenAI 兼容 API 密钥
 
-1. 访问 [OpenRouter](https://openrouter.ai) 注册账号
-2. 在控制台获取你的 API Key
+本项目支持任何 OpenAI 兼容的 API 提供商，包括：
+
+- **OpenRouter** (默认) - 访问 [OpenRouter](https://openrouter.ai) 注册账号并获取 API Key
+- **OpenAI** - 使用官方 OpenAI API
+- **其他兼容提供商** - 如 Azure OpenAI、本地 LLM 服务器等
 
 ### ⚙️ 配置 GitHub Secrets
 
 进入你的 GitHub 仓库设置页面：`Settings` → `Secrets and variables` → `Actions` → `New repository secret`
 
-添加以下两个密钥：
+添加以下密钥：
 
 | 密钥名称 | 说明 | 获取方式 |
 |---------|------|---------|
 | `MCD_MCP_TOKEN` | 麦当劳 MCP 令牌 | 从麦当劳开放平台获取 |
-| `OPENROUTER_API_KEY` | OpenRouter API 密钥 | 从 OpenRouter 控制台获取 |
+| `OPENAI_API_KEY` | OpenAI 兼容 API 密钥 | 从你选择的 API 提供商获取（如 OpenRouter、OpenAI 等） |
 
 ### 🎨 可选配置
 
@@ -93,7 +96,26 @@
 
 | 变量名称 | 说明 | 默认值 |
 |---------|------|-------|
-| `OPENROUTER_MODEL` | AI 模型选择 | `qwen/qwen3-coder:free` |
+| `OPENAI_MODEL` | AI 模型选择 | `qwen/qwen3-coder:free` |
+| `OPENAI_BASE_URL` | API 基础 URL | `https://openrouter.ai/api/v1` |
+
+**支持的 API 提供商示例：**
+
+- **OpenRouter** (默认)
+  - Base URL: `https://openrouter.ai/api/v1`
+  - 模型示例: `qwen/qwen3-coder:free`, `anthropic/claude-3.5-sonnet`
+  
+- **OpenAI 官方**
+  - Base URL: `https://api.openai.com/v1`
+  - 模型示例: `gpt-4o`, `gpt-4o-mini`
+  
+- **Azure OpenAI**
+  - Base URL: `https://{your-resource-name}.openai.azure.com/openai/deployments/{deployment-id}`
+  - 需要相应的 API 密钥配置
+
+- **本地 LLM 服务器**
+  - Base URL: 根据你的服务器配置
+  - 任何支持 OpenAI 兼容 API 的本地服务
 
 ---
 
@@ -129,8 +151,9 @@ npm run dev
 
 ```bash
 MCD_MCP_TOKEN=你的麦当劳MCP令牌
-OPENROUTER_API_KEY=你的OpenRouter密钥
-OPENROUTER_MODEL=qwen/qwen3-coder:free
+OPENAI_API_KEY=你的API密钥
+OPENAI_BASE_URL=https://openrouter.ai/api/v1
+OPENAI_MODEL=qwen/qwen3-coder:free
 ```
 
 ---
@@ -193,11 +216,12 @@ graph LR
 </details>
 
 <details>
-<summary><b>❓ 无法连接到 MCP 服务</b></summary>
+<summary><b>❓ 无法连接到 API 服务</b></summary>
 
 1. 确认 `MCD_MCP_TOKEN` 有效且未过期
-2. 检查 `OPENROUTER_API_KEY` 是否激活
-3. 访问麦当劳开放平台确认服务状态
+2. 检查 `OPENAI_API_KEY` 是否正确
+3. 如果使用自定义 API 提供商，确认 `OPENAI_BASE_URL` 配置正确
+4. 访问麦当劳开放平台确认服务状态
 
 </details>
 

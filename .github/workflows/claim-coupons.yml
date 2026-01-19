@@ -31,8 +31,9 @@ jobs:
       - name: Claim McDonald's Coupons
         env:
           MCD_MCP_TOKEN: ${{ secrets.MCD_MCP_TOKEN }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'qwen/qwen3-coder:free' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL || 'https://openrouter.ai/api/v1' }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'qwen/qwen3-coder:free' }}
         run: npm start
 
       - name: Upload logs (on failure)
