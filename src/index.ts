@@ -2,14 +2,14 @@
 
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import { createOpenAI } from '@ai-sdk/openai';
+import { openrouter } from '@openrouter/ai-sdk-provider';
 import { generateText, tool } from 'ai';
 import { z } from 'zod';
 
 // Configuration from environment variables
 const MCD_MCP_TOKEN = process.env.MCD_MCP_TOKEN;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'google/gemini-2.0-flash-exp:free';
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct:free';
 
 if (!MCD_MCP_TOKEN) {
   console.error('Error: MCD_MCP_TOKEN environment variable is required');
@@ -117,20 +117,12 @@ async function main() {
     });
   }
 
-  // Initialize OpenRouter with Vercel AI SDK (using OpenAI-compatible interface)
-  const openrouter = createOpenAI({
-    apiKey: OPENROUTER_API_KEY,
-    baseURL: 'https://openrouter.ai/api/v1',
-  });
-
   // Use AI to claim coupons
   console.log('\n🤖 Asking AI to claim McDonald\'s coupons...');
 
   try {
-    // Note: OpenRouter is OpenAI-compatible but returns LanguageModelV1
-    // We use type assertion here as the model works correctly despite the type mismatch
     const result = await generateText({
-      model: openrouter(OPENROUTER_MODEL) as any,
+      model: openrouter(OPENROUTER_MODEL),
       prompt: `You are an assistant that helps claim McDonald's coupons in China. 
       
 Your task is to:

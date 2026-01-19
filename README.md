@@ -93,11 +93,12 @@
 
 | 变量名称 | 说明 | 默认值 |
 |---------|------|-------|
-| `OPENROUTER_MODEL` | AI 模型选择 | `google/gemini-2.0-flash-exp:free` |
+| `OPENROUTER_MODEL` | AI 模型选择 | `meta-llama/llama-3.1-8b-instruct:free` |
 
 **其他免费模型选项：**
 - `meta-llama/llama-3.2-3b-instruct:free`
 - `qwen/qwen-2-7b-instruct:free`
+- `mistralai/devstral-2-2512:free`
 
 ---
 
@@ -134,7 +135,7 @@ npm run dev
 ```bash
 MCD_MCP_TOKEN=你的麦当劳MCP令牌
 OPENROUTER_API_KEY=你的OpenRouter密钥
-OPENROUTER_MODEL=google/gemini-2.0-flash-exp:free
+OPENROUTER_MODEL=meta-llama/llama-3.1-8b-instruct:free
 ```
 
 ---
