@@ -127,8 +127,10 @@ async function main() {
   console.log('\n🤖 Asking AI to claim McDonald\'s coupons...');
 
   try {
+    // Note: OpenRouter is OpenAI-compatible but returns LanguageModelV1
+    // We use type assertion here as the model works correctly despite the type mismatch
     const result = await generateText({
-      model: openrouter(OPENROUTER_MODEL) as any, // Cast to any to bypass type check
+      model: openrouter(OPENROUTER_MODEL) as any,
       prompt: `You are an assistant that helps claim McDonald's coupons in China. 
       
 Your task is to:
