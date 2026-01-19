@@ -9,7 +9,7 @@ import { z } from 'zod';
 // Configuration from environment variables
 const MCD_MCP_TOKEN = process.env.MCD_MCP_TOKEN;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.1-8b-instruct:free';
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'qwen/qwen3-coder:free';
 
 if (!MCD_MCP_TOKEN) {
   console.error('Error: MCD_MCP_TOKEN environment variable is required');
