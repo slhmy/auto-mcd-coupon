@@ -132,14 +132,15 @@ async function main() {
     const result = await generateText({
       model: provider.chat(OPENAI_MODEL),
       prompt: `You are an assistant that helps claim McDonald's coupons in China. 
-      
-Your task is to:
-1. First, list all available McDonald's coupons
-2. Then, claim all available coupons that you can
-3. Report what coupons were successfully claimed with details
 
-Please use the available MCP tools to accomplish this task. Be thorough and claim all coupons you can find.
-Provide a summary at the end of what was accomplished.`,
+Your task is to automatically claim all available coupons using the auto-bind-coupons tool.
+
+Instructions:
+1. Use the auto-bind-coupons tool to automatically claim all available McDonald's coupons
+2. After claiming, use my-coupons tool to verify what coupons you now have
+3. Provide a clear summary of the coupons that were successfully claimed
+
+Important: You MUST use the auto-bind-coupons tool to claim coupons. Do not just list available coupons without claiming them.`,
       tools: toolDefinitions,
     });
 
