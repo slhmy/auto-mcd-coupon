@@ -19,9 +19,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.12",
     "@modelcontextprotocol/sdk": "^1.25.2",
     "ai": "^6.0.40",
-    "@openrouter/ai-sdk-provider": "6.0.0-alpha.1",
     "zod": "^4.3.5"
   },
   "devDependencies": {

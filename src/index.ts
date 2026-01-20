@@ -2,7 +2,7 @@
 
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import { createOpenRouter } from '@openrouter/ai-sdk-provider';
+import { createOpenAI } from '@ai-sdk/openai';
 import { generateText, tool } from 'ai';
 import { z } from 'zod';
 
@@ -122,8 +122,8 @@ async function main() {
   // Use AI to claim coupons
   console.log('\n🤖 Asking AI to claim McDonald\'s coupons...');
 
-  // Create OpenRouter provider with custom settings
-  const provider = createOpenRouter({
+  // Create OpenAI-compatible provider with custom settings
+  const provider = createOpenAI({
     apiKey: OPENAI_API_KEY,
     baseURL: OPENAI_BASE_URL,
   });
