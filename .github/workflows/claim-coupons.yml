@@ -31,8 +31,6 @@ jobs:
       - name: Claim McDonald's Coupons
         env:
           MCD_MCP_TOKEN: ${{ secrets.MCD_MCP_TOKEN }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL || 'qwen/qwen3-coder:free' }}
         run: npm start
 
       - name: Upload logs (on failure)
