@@ -2,7 +2,7 @@
 
 # 🍔 麦当劳优惠券自动领取工具
 
-*基于 AI 和 MCP 协议的智能优惠券管理系统*
+*基于 MCP 协议的自动优惠券管理系统*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
@@ -14,7 +14,7 @@
 
 ## ✨ 项目简介
 
-这是一个利用人工智能和模型上下文协议（MCP）自动领取麦当劳中国优惠券的工具。通过 GitHub Actions 实现每周自动运行，让你再也不会错过任何优惠！
+这是一个利用模型上下文协议（MCP）自动领取麦当劳中国优惠券的工具。通过 GitHub Actions 实现每周自动运行，让你再也不会错过任何优惠！
 
 ### 🎯 核心特性
 
@@ -22,10 +22,10 @@
 <tr>
 <td width="50%">
 
-#### 🤖 AI 智能领取
-- 使用 Vercel AI SDK 智能编排
-- 接入 OpenRouter 免费 AI 模型
-- 自动识别并领取所有可用优惠券
+#### 🎟️ 自动领取
+- 单次调用 `auto-bind-coupons` 工具
+- 自动领取所有可用优惠券
+- 无需任何 AI 模型或提示词
 
 </td>
 <td width="50%">
@@ -50,7 +50,6 @@
 
 #### 🛠️ 技术栈
 - Node.js + TypeScript
-- Vercel AI SDK v6
 - 麦当劳 MCP 服务
 - GitHub Actions
 
@@ -71,29 +70,15 @@
 3. 点击右上角进入「**控制台**」
 4. 点击「**激活**」按钮获取你的 MCP Token
 
-#### 2️⃣ 获取 OpenRouter API Key
-
-1. 访问 [OpenRouter](https://openrouter.ai) 注册账号
-2. 在控制台获取你的 API Key
-
 ### ⚙️ 配置 GitHub Secrets
 
 进入你的 GitHub 仓库设置页面：`Settings` → `Secrets and variables` → `Actions` → `New repository secret`
 
-添加以下两个密钥：
+添加以下密钥：
 
 | 密钥名称 | 说明 | 获取方式 |
 |---------|------|---------|
 | `MCD_MCP_TOKEN` | 麦当劳 MCP 令牌 | 从麦当劳开放平台获取 |
-| `OPENROUTER_API_KEY` | OpenRouter API 密钥 | 从 OpenRouter 控制台获取 |
-
-### 🎨 可选配置
-
-在 `Settings` → `Secrets and variables` → `Actions` → `Variables` 中添加：
-
-| 变量名称 | 说明 | 默认值 |
-|---------|------|-------|
-| `OPENROUTER_MODEL` | AI 模型选择 | `qwen/qwen3-coder:free` |
 
 ---
 
@@ -129,8 +114,6 @@ npm run dev
 
 ```bash
 MCD_MCP_TOKEN=你的麦当劳MCP令牌
-OPENROUTER_API_KEY=你的OpenRouter密钥
-OPENROUTER_MODEL=qwen/qwen3-coder:free
 ```
 
 ---
@@ -157,18 +140,16 @@ OPENROUTER_MODEL=qwen/qwen3-coder:free
 graph LR
     A[GitHub Actions 触发] --> B[连接麦当劳 MCP 服务]
     B --> C[获取可用工具列表]
-    C --> D[AI 分析优惠券]
-    D --> E[自动领取优惠券]
-    E --> F[记录执行日志]
+    C --> D[调用 auto-bind-coupons]
+    D --> E[记录执行日志]
 ```
 
 **详细流程：**
 
 1. 🔌 **连接服务** - 使用 MCP Token 连接麦当劳开放平台
 2. 🔍 **发现工具** - 获取 MCP 服务提供的所有工具（查询、领取等）
-3. 🧠 **AI 决策** - AI 智能分析可用优惠券并制定领取策略
-4. 🎁 **自动领取** - 批量领取所有可用优惠券
-5. 📝 **记录日志** - 详细记录整个过程以便调试
+3. 🎟️ **自动领取** - 单次调用 `auto-bind-coupons` 批量领取优惠券
+4. 📝 **记录日志** - 详细记录整个过程以便调试
 
 ---
 
@@ -196,8 +177,7 @@ graph LR
 <summary><b>❓ 无法连接到 MCP 服务</b></summary>
 
 1. 确认 `MCD_MCP_TOKEN` 有效且未过期
-2. 检查 `OPENROUTER_API_KEY` 是否激活
-3. 访问麦当劳开放平台确认服务状态
+2. 访问麦当劳开放平台确认服务状态
 
 </details>
 

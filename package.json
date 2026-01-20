@@ -1,7 +1,7 @@
 {
   "name": "auto-mcd-coupon",
   "version": "1.0.0",
-  "description": "Automatically claim McDonald's CN coupons using AI and MCP",
+  "description": "Automatically claim McDonald's CN coupons using MCP",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
@@ -13,17 +13,13 @@
     "mcdonalds",
     "coupon",
     "automation",
-    "ai",
     "mcp"
   ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.2",
-    "@openrouter/ai-sdk-provider": "6.0.0-alpha.1",
-    "ai": "^6.0.40",
-    "dotenv": "^17.2.3",
-    "zod": "^4.3.5"
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
