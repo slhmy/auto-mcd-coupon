@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto McDonald's Coupon Claim Service
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/Documents/tweak/auto-mcd-coupon
+ExecStart=/usr/bin/npm start
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target

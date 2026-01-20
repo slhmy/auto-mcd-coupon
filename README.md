@@ -120,17 +120,51 @@ MCD_MCP_TOKEN=你的麦当劳MCP令牌
 
 ## 🤖 自动化工作流
 
-### 定时执行
+### GitHub Actions（推荐）
+
+#### 定时执行
 
 工作流将在以下时间自动运行：
 - **每周一上午 11:00**（北京时间）
 
-### 手动触发
+#### 手动触发
 
 1. 进入仓库的 `Actions` 标签页
 2. 选择 `Auto Claim McDonald's Coupons` 工作流
 3. 点击 `Run workflow` 按钮
 4. 选择分支并确认运行
+
+### 本地 Systemd 用户服务（Linux）
+
+如果你想在本地 Linux 系统上设置自动运行，可以使用 systemd 用户服务：
+
+#### 安装服务
+
+```bash
+# 运行安装脚本
+./install-systemd.sh
+```
+
+#### 管理服务
+
+```bash
+# 查看定时器状态
+systemctl --user status auto-mcd-coupon.timer
+
+# 查看服务日志
+journalctl --user -u auto-mcd-coupon.service
+
+# 停止定时器
+systemctl --user stop auto-mcd-coupon.timer
+
+# 禁用定时器
+systemctl --user disable auto-mcd-coupon.timer
+
+# 手动运行一次
+systemctl --user start auto-mcd-coupon.service
+```
+
+**执行时间：** 每天上午 10:45 自动运行
 
 ---
 

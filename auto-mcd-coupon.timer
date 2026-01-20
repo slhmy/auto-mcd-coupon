@@ -1,0 +1,10 @@
+[Unit]
+Description=Auto McDonald's Coupon Claim Timer
+Requires=auto-mcd-coupon.service
+
+[Timer]
+OnCalendar=*-*-* 10:45:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
