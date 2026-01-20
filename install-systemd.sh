@@ -18,7 +18,7 @@ systemctl --user enable auto-mcd-coupon.timer
 systemctl --user start auto-mcd-coupon.timer
 
 echo "✅ Systemd 用户服务已安装并启动"
-echo "📅 将在每天上午 10:00 自动运行"
+echo "📅 将在每天上午 10:45 自动运行"
 echo ""
 echo "查看状态: systemctl --user status auto-mcd-coupon.timer"
 echo "查看日志: journalctl --user -u auto-mcd-coupon.service"
