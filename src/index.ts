@@ -130,7 +130,7 @@ async function main() {
 
   try {
     const result = await generateText({
-      model: provider(OPENAI_MODEL),
+      model: provider.chat(OPENAI_MODEL),
       prompt: `You are an assistant that helps claim McDonald's coupons in China. 
       
 Your task is to:
